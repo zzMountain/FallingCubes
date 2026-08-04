@@ -3,21 +3,21 @@ using UnityEngine;
 
 namespace FallingCubes
 {
-    [RequireComponent(typeof(FallingCubePool))]
-    public sealed class FallingCubeSpawner : MonoBehaviour
+    [RequireComponent(typeof(CubePool))]
+    public class CubeSpawner : MonoBehaviour
     {
         [SerializeField] private float _spawnInterval = 0.25f;
         [SerializeField] private Vector3 _spawnCenter = new Vector3(0f, 12f, 0f);
         [SerializeField] private Vector2 _spawnArea = new Vector2(10f, 10f);
 
-        private FallingCubePool _pool;
+        private CubePool _pool;
         private WaitForSeconds _spawnWait;
         private Coroutine _spawningCoroutine;
         private bool _hasStarted;
 
         private void Awake()
         {
-            _pool = GetComponent<FallingCubePool>();
+            _pool = GetComponent<CubePool>();
             _spawnWait = new WaitForSeconds(_spawnInterval);
         }
 
@@ -66,9 +66,7 @@ namespace FallingCubes
             float xPosition = Random.Range(_spawnCenter.x - halfWidth, _spawnCenter.x + halfWidth);
             float zPosition = Random.Range(_spawnCenter.z - halfDepth, _spawnCenter.z + halfDepth);
             Vector3 position = new Vector3(xPosition, _spawnCenter.y, zPosition);
-            FallingCube cube = _pool.Get();
-
-            cube.Activate(position, Random.rotation);
+            _pool.Get(position, Random.rotation);
         }
     }
 }

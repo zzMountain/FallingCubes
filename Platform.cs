@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FallingCubes
 {
-    public sealed class FallingCubeSurface : MonoBehaviour
+    public class Platform : MonoBehaviour
     {
     }
 }
